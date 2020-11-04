@@ -2,7 +2,12 @@ import spark.Spark;
 import spark.Request;
 import spark.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class RestfulServer {
+    private final Logger logger = LoggerFactory.getLogger(RestfulServer.class);
+
     public RestfulServer() {
         this.configureRestfulApiServer();
         this.processRestfulApiRequests();
@@ -10,11 +15,12 @@ public class RestfulServer {
 
     private void configureRestfulApiServer() {
         Spark.port(8080);
-        System.out.println("Server configured to listen on port 8080");
+        logger.info("Server configured to listen on port 8080");
     }
 
     private void processRestfulApiRequests() {
         Spark.get("/", this::echoRequest);
+        Spark.post("/", this::echoRequest);
     }
 
     private String echoRequest(Request request, Response response) {
@@ -26,6 +32,7 @@ public class RestfulServer {
     }
 
     private String HttpRequestToJson(Request request) {
+        logger.info(request.body());
         return "{\n" + "\"attributes\":\"" + request.attributes() + "\",\n" + "\"body\":\"" + request.body() + "\",\n"
                 + "\"contentLength\":\"" + request.contentLength() + "\",\n" + "\"contentType\":\""
                 + request.contentType() + "\",\n" + "\"contextPath\":\"" + request.contextPath() + "\",\n"
