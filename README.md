@@ -1,5 +1,5 @@
 # Description
-This project provides information related to coronavirus cases. It utilizes docker with kubernetes to provide an API and a backend. The API is written in Java with spark.
+The goal of our project is to become more experienced with containers and development environments. Within our project scope we will be utilizing containerization to receive, manipulate, and output information related to coronavirus cases. This will allow us to not only become more skilled in working with containers, but help us alleviate a multitude of development and compatibility issues. Currently constructed is a RESTFUL web server that is able to receive an HTTP request and log the request body to STDOUT. Also, a Dockerfile with kubernetes that when built builds a Docker image to provide an API and a backend. The API is written in Java with spark.
 
 
 # Usage
