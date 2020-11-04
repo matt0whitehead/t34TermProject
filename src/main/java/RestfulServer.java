@@ -31,6 +31,7 @@ public class RestfulServer {
     }
 
     private String HttpRequestToJson(Request request) {
+        System.out.println(request.body());
         return "{\n" + "\"attributes\":\"" + request.attributes() + "\",\n" + "\"body\":\"" + request.body() + "\",\n"
                 + "\"contentLength\":\"" + request.contentLength() + "\",\n" + "\"contentType\":\""
                 + request.contentType() + "\",\n" + "\"contextPath\":\"" + request.contextPath() + "\",\n"
