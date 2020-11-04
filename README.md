@@ -1,4 +1,6 @@
 # Description
+This project provides information related to coronavirus cases. It utilizes docker with kubernetes to provide an API and a backend. 
+
 
 # Usage
 Build the project with `mvn package`. This requires that maven is installed on your system.
