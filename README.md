@@ -1,5 +1,5 @@
 # Description
-This project provides information related to coronavirus cases. It utilizes docker with kubernetes to provide an API and a backend. 
+This project provides information related to coronavirus cases. It utilizes docker with kubernetes to provide an API and a backend. The API is written in Java with spark.
 
 
 # Usage
