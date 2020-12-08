@@ -8,11 +8,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 10,
 }).addTo(map);
 
-let stateMarker;
+$(document).ready(function () {
+    $.getJSON('/data', function (results) {
+        let stateMarker;
 
-for (let i=0; i < markers.length; ++i) {
-    if(markers[i].Lat != "" && markers[i].Long_ != "") {
-        stateMarker = L.marker([markers[i].Lat, markers[i].Long_]).addTo(map)
-        stateMarker.bindPopup(markers[i].Province_State + "<br/>" + "Deaths:" + markers[i].Total_Deaths);
-    }
-}
+        for (let i = 0; i < results.length; ++i) {
+            if (results[i].Lat != "" && results[i].Long_ != "") {
+                stateMarker = L.marker([results[i].Lat, results[i].Long_]).addTo(map)
+                stateMarker.bindPopup(results[i].Province_State + "<br/>" + "Deaths:" + results[i].Total_Deaths);
+            }
+        }
+        // for (let i = 0; i < markers.length; ++i) {
+        //     if (markers[i].Lat != "" && markers[i].Long_ != "") {
+        //         stateMarker = L.marker([markers[i].Lat, markers[i].Long_]).addTo(map)
+        //         stateMarker.bindPopup(markers[i].Province_State + "<br/>" + "Deaths:" + markers[i].Total_Deaths);
+        //     }
+        // }
+    });
+})
