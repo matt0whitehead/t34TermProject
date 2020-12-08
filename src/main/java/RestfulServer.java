@@ -75,7 +75,7 @@ public class RestfulServer {
         Statement stmt = null;
         String data = "{}";
         try {
-            conn = DriverManager.getConnection(url, "root", "");
+            conn = DriverManager.getConnection(url, "root", "root");
             logger.info("Connection to database has been established.");
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM covid;");
