@@ -25,6 +25,7 @@ public class RestfulServer {
     }
 
     private void processRestfulApiRequests() {
+        Spark.staticFileLocation("/public");
         Spark.get("/data", this::getData);
         Spark.get("/", this::echoRequest);
         Spark.post("/", this::echoRequest);
@@ -34,6 +35,7 @@ public class RestfulServer {
         response.type("application/json");
         response.header("Access-Control-Allow-Origin", "*");
         response.status(200);
+        response.redirect("index.html");
 
         return HttpRequestToJson(request);
     }
