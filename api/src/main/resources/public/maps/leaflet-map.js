@@ -1,4 +1,4 @@
-// See post: http://asmaloney.com/2014/01/code/creating-an-interactive-map-with-leaflet-and-openstreetmap/
+//See post: http://asmaloney.com/2014/01/code/creating-an-interactive-map-with-leaflet-and-openstreetmap/
 
 let lat = 39.8283;
 let lon = -98.5795;
@@ -10,19 +10,20 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 $(document).ready(function () {
     $.getJSON('/data', function (results) {
-        let stateMarker;
-
         for (let i = 0; i < results.length; ++i) {
             if (results[i].Lat != "" && results[i].Long_ != "") {
-                stateMarker = L.marker([results[i].Lat, results[i].Long_]).addTo(map)
-                stateMarker.bindPopup(results[i].Province_State + "<br/>" + "Deaths:" + results[i].Total_Deaths);
+                L.marker([markers[i].Lat, markers[i].Long_]).addTo(map)
+                    .bindPopup(markers[i].Province_State + "<br/>" + "Deaths: " + markers[i].Total_Deaths);
             }
         }
-        // for (let i = 0; i < markers.length; ++i) {
-        //     if (markers[i].Lat != "" && markers[i].Long_ != "") {
-        //         stateMarker = L.marker([markers[i].Lat, markers[i].Long_]).addTo(map)
-        //         stateMarker.bindPopup(markers[i].Province_State + "<br/>" + "Deaths:" + markers[i].Total_Deaths);
-        //     }
-        // }
     });
 })
+
+/*
+for (let i = 0; i < markers.length; ++i) {
+    if (markers[i].Lat != "" && markers[i].Long_ != "") {
+        L.marker([markers[i].Lat, markers[i].Long_]).addTo(map)
+            .bindPopup(markers[i].Province_State + "<br/>" + "Deaths: " + markers[i].Total_Deaths);
+    }
+}
+ */
