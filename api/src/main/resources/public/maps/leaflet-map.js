@@ -12,8 +12,8 @@ $(document).ready(function () {
     $.getJSON('/data', function (results) {
         for (let i = 0; i < results.length; ++i) {
             if (results[i].Lat != "" && results[i].Long_ != "") {
-                L.marker([markers[i].Lat, markers[i].Long_]).addTo(map)
-                    .bindPopup(markers[i].Province_State + "<br/>" + "Deaths: " + markers[i].Total_Deaths);
+                L.marker([results[i].Lat, results[i].Long_]).addTo(map)
+                    .bindPopup(results[i].Province_State + "<br/>" + "Deaths: " + results[i].Total_Deaths);
             }
         }
     });
