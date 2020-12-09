@@ -26,19 +26,20 @@ public class RestfulServer {
 
     private void processRestfulApiRequests() {
         Spark.staticFileLocation("/public");
+        Spark.get("/", this::displayMap);
         Spark.get("/data", this::getData);
-        Spark.get("/", this::echoRequest);
-        Spark.post("/", this::echoRequest);
+        Spark.post("/data", this::getData);
     }
 
-    private String echoRequest(Request request, Response response) {
+    private String displayMap(Request request, Response response) {
         response.type("application/json");
         response.header("Access-Control-Allow-Origin", "*");
         response.status(200);
         response.redirect("index.html");
 
-        return HttpRequestToJson(request);
+        return "{}";
     }
+
 
     private String convertResult(ResultSet rs) throws SQLException {
         String data = "";
@@ -69,6 +70,8 @@ public class RestfulServer {
         response.type("application/json");
         response.header("Access-Control-Allow-Origin", "*");
         response.status(200);
+
+        logger.info(request.body());
         
         String url = "jdbc:mysql://localhost/covid";
         Connection conn = null;
@@ -95,21 +98,6 @@ public class RestfulServer {
         }
         logger.info("Connection to database has been closed.");
         return data;
-    }
-
-    private String HttpRequestToJson(Request request) {
-        logger.info(request.body());
-        return "{\n" + "\"attributes\":\"" + request.attributes() + "\",\n" + "\"body\":\"" + request.body() + "\",\n"
-                + "\"contentLength\":\"" + request.contentLength() + "\",\n" + "\"contentType\":\""
-                + request.contentType() + "\",\n" + "\"contextPath\":\"" + request.contextPath() + "\",\n"
-                + "\"cookies\":\"" + request.cookies() + "\",\n" + "\"headers\":\"" + request.headers() + "\",\n"
-                + "\"host\":\"" + request.host() + "\",\n" + "\"ip\":\"" + request.ip() + "\",\n" + "\"params\":\""
-                + request.params() + "\",\n" + "\"pathInfo\":\"" + request.pathInfo() + "\",\n" + "\"serverPort\":\""
-                + request.port() + "\",\n" + "\"protocol\":\"" + request.protocol() + "\",\n" + "\"queryParams\":\""
-                + request.queryParams() + "\",\n" + "\"requestMethod\":\"" + request.requestMethod() + "\",\n"
-                + "\"scheme\":\"" + request.scheme() + "\",\n" + "\"servletPath\":\"" + request.servletPath() + "\",\n"
-                + "\"session\":\"" + request.session() + "\",\n" + "\"uri()\":\"" + request.uri() + "\",\n"
-                + "\"url()\":\"" + request.url() + "\",\n" + "\"userAgent\":\"" + request.userAgent() + "\"\n" + "}";
     }
 
     public static void main(String[] programArgs) {
