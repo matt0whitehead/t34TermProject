@@ -3,15 +3,24 @@ The goal of our project is to become more experienced with containers and develo
 
 
 # Usage
-Build the project with `mvn package`. This requires that maven is installed on your system.
+Build the webserver by navigating to /api then by running `mvn package`. This requires that maven is installed on your system.
 
-Run the webserver with `java -jar target/t34TermProject-1.0-SNAPSHOT.jar`.
+Run the webserver with `java -jar target/t34TermProject-1.0-SNAPSHOT.jar` when in /api.
 
 # Docker
-Build the API docker image with `docker build -t n8snyder/370api .`.
+## API
+Build the API docker image by navigating to /api then by running `docker build -t n8snyder/370api .`.
 
 Push to docker hub with `docker push n8snyder/370api`.
 
 Run with `docker run -p 8080:8080 n8snyder/370api`. This will run the webserver from the local docker image and will download the image first if it does not exist.
 
 To update your local image, run `docker pull n8snyder/370api`.
+## Database
+Build the database docker image by navigating to /database then by running `docker build -t n8snyder/370db .`.
+
+Push to docker hub with `docker push n8snyder/370db`.
+
+Run with `docker run n8snyder/370db&`. This will run the database from the local docker image and will download the image first if it does not exist.
+
+To update your local image, run `docker pull n8snyder/370db`.
